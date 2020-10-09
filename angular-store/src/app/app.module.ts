@@ -9,6 +9,8 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
 import { MyListingsPageComponent } from './my-listings-page/my-listings-page.component';
 import { NewListingsComponent } from './new-listings/new-listings.component';
 import { EditListingPageComponent } from './edit-listing-page/edit-listing-page.component';
+import { ListingDataFormComponent } from './listing-data-form/listing-data-form.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { EditListingPageComponent } from './edit-listing-page/edit-listing-page.
     ContactPageComponent,
     MyListingsPageComponent,
     NewListingsComponent,
-    EditListingPageComponent
+    EditListingPageComponent,
+    ListingDataFormComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

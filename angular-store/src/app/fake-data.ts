@@ -1,22 +1,28 @@
-import { Listing } from './types'
-export const fakeListings: Listing[] = [{
+import { Item } from './types'
+export const fakeListings: Item[] = [{
     id: '123',
-    name: 'Old Boat',
-    description: 'A very old boat. Bargain price',
-    price: 700,
+    name: 'Toilet Paper',
+    department: 'Home Goods',
+    description: `Essential in today's world`,
+    quantity: 925,
+    price: 7.99,
 }, {
     id: '345',
-    name: 'Computer',
-    description: 'From the 1990s, a classic!',
-    price: 50,
+    name: 'Sardine Oil',
+    department: 'Food',
+    description: 'Rub on the feet of your enemies to get cats to attack them!!!',
+    quantity: 286,
+    price: 2.99,
 }, {
     id: '456',
-    name: 'Basketball Hoop',
-    description: 'Good condition, free delivery',
+    name: 'Tiger Cubs',
+    department: 'Pets',
+    description: 'Fill your hearts with adorableness.  And when they get too big, eat too much and get too expensive to maintain do what you got to do.  Then buy a new one!!!',
+    quantity: 21,
     price: 100,
 }];
 
-export const fakeMyListings: Listing[] = [{
+export const fakeMyListings: Item[] = [{
     id: '789',
     name: 'Bicycle',
     description: 'Bright blue, very fast',

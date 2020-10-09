@@ -1,7 +1,13 @@
 <div>
     <div class="content-box" *ngFor="let listing of listings">
         <a routerLink="/listings/{{listing.id}}">
-        <h3>{{listing.name}} - ${{listing.price}}</h3>
+        <h3>{{listing.name}}</h3>
         </a>
+        <p>{{listing.description}}</p>
+        <p>Number left: {{listing.quantity}}</p>
+        <p>${{listing.price}}</p>
+        <button (click) = "buyProduct(listing.id)">Buy</button>
+
+
     </div>
 </div>
