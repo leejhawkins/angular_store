@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Item } from '../types';
-import { fakeListings } from '../fake-data'
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { Department, Item } from '../types';
+import { ListingsService} from "../listings.service"
 
 @Component({
   selector: 'app-listings-page',
@@ -9,19 +9,31 @@ import { fakeListings } from '../fake-data'
 })
 export class ListingsPageComponent implements OnInit {
   listings: Item[] = [];
-  constructor() { }
+  departments: Department[] = []
+  currentDepartment: string = '';
+
+  constructor(
+    private listingsService: ListingsService
+  ) { }
 
   ngOnInit(): void {
-    this.listings = fakeListings;
+    this.listingsService.getItems()
+      .subscribe(listings => this.listings = listings)
+    this.listingsService.getDepartments()
+      .subscribe(departments => this.departments = departments)
   }
-  buyProduct(id: number): void {
-    const listings = this.listings
-    const listing  = this.listings.find(listing => listing.id === id)
-    listing.quantity = listing.quantity -1 
-    this.listings = listings
-
+  buyProduct(id): void {
+    let updatedListing = this.listings.find(listing => listing.item_id === id)
+    this.listingsService.buyProduct(id)
+      .subscribe(listing=> {
+        updatedListing.stock_quantity = listing.stock_quantity
+      })
     
-
   }
+  setDepartment(name): void {
+    this.currentDepartment = name
+  }
+
+
   
 }

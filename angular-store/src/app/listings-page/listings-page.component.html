@@ -1,13 +1,23 @@
 <div>
-    <div class="content-box" *ngFor="let listing of listings">
-        <a routerLink="/listings/{{listing.id}}">
-        <h3>{{listing.name}}</h3>
-        </a>
-        <p>{{listing.description}}</p>
-        <p>Number left: {{listing.quantity}}</p>
-        <p>${{listing.price}}</p>
-        <button (click) = "buyProduct(listing.id)">Buy</button>
-
-
+    <div class="formgroup">
+        <span class="label">Departments:</span>
+       
+        <select [(ngModel)] = "currentDepartment">
+            <option selected disabled value="">All Departments</option>
+           <option *ngFor="let department of departments;index as i; first as isFirst">{{department.department_name}}</option>
+        </select>
+    
     </div>
+   
+
+    <div class="content-box" *ngFor="let listing of listings" [hidden]="!currentDepartment ? '': currentDepartment != listing.department_name  ">
+       
+        <a routerLink="/listings/{{listing.item_id}}">
+        <h3>{{listing.product_name}}</h3>
+        </a>
+        <p>Number left: {{listing.stock_quantity}}</p>
+        <p>${{listing.price}}</p>
+        <p>Department: {{listing.department_name}}</p>
+        <button (click) = "buyProduct(listing.item_id)">Buy</button>
+
 </div>

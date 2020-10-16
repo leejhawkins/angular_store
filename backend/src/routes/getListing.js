@@ -9,7 +9,8 @@ export const getListingRoute = {
         const { results}= await db.query(
             'SELECT * FROM products WHERE item_id=? ', id
         )
+        const item = results[0]
         if (!results) throw Boom.notFound(`Listing does not exist`)
-        return results;
+        return item;
     }
 }
