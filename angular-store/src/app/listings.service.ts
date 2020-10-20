@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Department, Item, } from './types'
+import { AngularFireAuth } from '@angular/fire/auth'
+import { Department, Item, Transaction, User } from './types'
 
 const httpOption = {
   headers: new HttpHeaders ({
     'Content-Type': 'application/json',
   })
 }
+
+const httpOptionsWithAuthToken = token => ({
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'AuthToken': token
+  })
+})
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +24,7 @@ export class ListingsService {
 
   constructor(
     private http: HttpClient,
+    private auth: AngularFireAuth,
   ) { }
 
   getItems(): Observable<Item[]> {
@@ -23,6 +32,23 @@ export class ListingsService {
   }
   getDepartments(): Observable<Department[]> {
     return this.http.get<Department[]>('/api/departments')
+  }
+  getUser(): Observable<User> {
+    return new Observable<User>(observer => {
+      this.auth.user.subscribe(user => {
+        user && user.getIdToken().then(token =>{
+          if (user && token) {
+            this.http.get<User>(`/api/users/${user.uid}`, httpOptionsWithAuthToken(token))
+              .subscribe(user => {
+                observer.next(user)
+
+              })
+          } else {
+            observer.next()
+          }
+        })
+      })
+    })
 
   }
   getItemById(id: string): Observable<Item> {
@@ -34,6 +60,23 @@ export class ListingsService {
     {},
     httpOption,
     )
+  }
+  getTransactionsByUser(): Observable<Transaction[]> {
+    return new Observable<Transaction[]>(observer => {
+      this.auth.user.subscribe(user => {
+        user && user.getIdToken().then(token => {
+          if (user && token) {
+            this.http.get<Transaction[]>(`/api/users/${user.uid}/transactions`, httpOptionsWithAuthToken(token))
+              .subscribe(transactions => {
+                observer.next(transactions)
+
+              })
+          } else {
+            observer.next([])
+          }
+        })
+      })
+    })
   }
   
 }

@@ -1,10 +1,12 @@
 import mysql from 'mysql';
+require("dotenv").config();
+
 
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
+    user: process.env.DB_USER,
     port: 3306,
-    password: 'hotsauce26',
+    password: process.env.DB_PASSWORD,
     database: 'bamazon',
 })
 

@@ -1,0 +1,25 @@
+<div class="content-box" >
+    <h3>Transactions</h3>
+    <table>
+        <thead>
+            <th>#</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Item</th>
+            <th>Account Balance</th>
+            <th>Date</th>
+        </thead>
+        <tbody *ngFor="let transaction of transactions">
+            <td>{{transaction.transaction_id}}</td>
+            <td>{{transaction.transaction_type}}</td>
+            <td>${{transaction.amount}}</td>
+            <td>{{transaction.items}}</td>
+            <td>{{transaction.account_balance}}</td>
+            <td>{{transaction.transaction_date | date:format:'longDate'}}</td>
+        </tbody >
+        
+
+    </table>
+
+</div>
+        

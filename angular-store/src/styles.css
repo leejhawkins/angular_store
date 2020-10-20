@@ -3,6 +3,10 @@ body {
     margin: 0;
     padding: 0;
 }
+td {
+    font-size: 12px;
+    padding: 10px 20px;
+}
 
 button {
     background-color: black;
@@ -61,6 +65,7 @@ div {
     position: absolute;
     top: 16px;
     right: 16px;
+    font-size: 12px;
 }
 
 #content-wrap {
