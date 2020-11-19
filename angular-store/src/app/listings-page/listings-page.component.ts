@@ -12,7 +12,6 @@ export class ListingsPageComponent implements OnInit {
   listings: Item[] = [];
   departments: Department[] = []
   currentDepartment: string = '';
-  user: User;
 
   constructor(
     private listingsService: ListingsService
@@ -23,8 +22,8 @@ export class ListingsPageComponent implements OnInit {
       .subscribe(listings => this.listings = listings)
     this.listingsService.getDepartments()
       .subscribe(departments => this.departments = departments)
-    this.getUser()
   }
+
   buyProduct(id,price,name): void {
     let updatedListing = this.listings.find(listing => listing.item_id === id)
     this.listingsService.buyProduct(id,price,name)
@@ -37,7 +36,7 @@ export class ListingsPageComponent implements OnInit {
   getUser():void {
     this.listingsService.getUser()
       .subscribe(user => {
-        this.user = user
+        this.listingsService.user = user;
       })
   }
   setDepartment(name): void {

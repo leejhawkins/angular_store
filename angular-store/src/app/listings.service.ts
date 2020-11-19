@@ -66,10 +66,8 @@ export class ListingsService {
             httpOptionsWithAuthToken(token),
           ).subscribe(item => {
             observer.next(item)
-            this.getUser();
           })
         })
-       
       })
     })
   }
