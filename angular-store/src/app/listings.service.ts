@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { AngularFireAuth } from '@angular/fire/auth'
 import { Department, Item, Transaction, User } from './types'
 
+
 const httpOption = {
   headers: new HttpHeaders ({
     'Content-Type': 'application/json',
@@ -21,7 +22,7 @@ const httpOptionsWithAuthToken = token => ({
   providedIn: 'root'
 })
 export class ListingsService {
-
+  user: User;
   constructor(
     private http: HttpClient,
     private auth: AngularFireAuth,
@@ -40,7 +41,7 @@ export class ListingsService {
           if (user && token) {
             this.http.get<User>(`/api/users/${user.uid}`, httpOptionsWithAuthToken(token))
               .subscribe(user => {
-                observer.next(user)
+                this.user = user;
 
               })
           } else {
@@ -54,12 +55,23 @@ export class ListingsService {
   getItemById(id: string): Observable<Item> {
     return this.http.get<Item>(`/api/listings/${id}`)
   }
-  buyProduct(id: string): Observable<Item> {
-    return this.http.post<Item>(
-    `/api/listings/${id}/buy-product`,
-    {},
-    httpOption,
-    )
+  buyProduct(id: string, price: number, name: string): Observable<Item> {
+    var currentUser = this.user;
+    return new Observable<Item>(observer => {
+      this.auth.user.subscribe(user=> {
+        user && user.getIdToken().then(token => {
+          this.http.post<Item>(
+            `/api/listings/${id}/buy-product`,
+            {name, price, currentUser},
+            httpOptionsWithAuthToken(token),
+          ).subscribe(item => {
+            observer.next(item)
+            this.getUser();
+          })
+        })
+       
+      })
+    })
   }
   getTransactionsByUser(): Observable<Transaction[]> {
     return new Observable<Transaction[]>(observer => {

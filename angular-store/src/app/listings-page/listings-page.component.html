@@ -18,6 +18,6 @@
         <p>Number left: {{listing.stock_quantity}}</p>
         <p>${{listing.price}}</p>
         <p>Department: {{listing.department_name}}</p>
-        <button (click) = "buyProduct(listing.item_id)">Buy</button>
+        <button (click) = "buyProduct(listing.item_id, listing.price, listing.product_name)">Buy</button>
 
 </div>

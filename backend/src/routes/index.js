@@ -4,6 +4,7 @@ import { buyProduct } from  './buyProduct'
 import { getUserTransactions } from './getUserTransactions'
 import { createNewUser } from './createNewUser'
 import { getDepartments } from './getDepartments'
+import { getUser } from './getUser'
 
 export default [
     getAllListingsRoute,
@@ -11,5 +12,6 @@ export default [
     getListingRoute,
     buyProduct,
     getUserTransactions,
-    createNewUser
+    createNewUser,
+    getUser
 ]

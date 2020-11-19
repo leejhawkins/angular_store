@@ -8,8 +8,9 @@ export const getUserTransactions = {
     handler: async(req,h) => {
         const token = req.headers.authtoken;
         const user = await admin.auth().verifyIdToken(token)
+        console.log(user)
         const userId = req.params.userId;
-        // if (user.user_id != userId) throw Boom.unauthorized('User can only access own transactions ')
+        if (user.uid != userId) throw Boom.unauthorized('User can only access own transactions ')
         const { results } = await db.query(
             'SELECT * FROM transactions WHERE user_id=? ', userId
         )

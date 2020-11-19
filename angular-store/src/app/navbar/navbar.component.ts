@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../types'
+import { ListingsService } from '../listings.service'
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    private listingsService: ListingsService
+  ) { }
 
   ngOnInit(): void {
   }
+
+  get user():User {
+    return this.listingsService.user
+  }
+
 
 }

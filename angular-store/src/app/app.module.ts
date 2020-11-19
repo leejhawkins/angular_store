@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule }  from '@angular/fire'
@@ -24,6 +25,7 @@ import { UserTransactionPageComponent } from './user-transaction-page/user-trans
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),

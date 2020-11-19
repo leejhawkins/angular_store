@@ -12,9 +12,9 @@
         <tbody *ngFor="let transaction of transactions">
             <td>{{transaction.transaction_id}}</td>
             <td>{{transaction.transaction_type}}</td>
-            <td>${{transaction.amount}}</td>
+            <td>{{transaction.amount | currency}}</td>
             <td>{{transaction.items}}</td>
-            <td>{{transaction.account_balance}}</td>
+            <td>{{transaction.account_balance | currency}}</td>
             <td>{{transaction.transaction_date | date:format:'longDate'}}</td>
         </tbody >
         

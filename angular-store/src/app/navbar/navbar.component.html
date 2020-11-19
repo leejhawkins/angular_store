@@ -2,7 +2,14 @@
     <a routerLink="/listings">
         <h1 id="app-heading">Tiger Store</h1>
     </a>
+    
+    
     <a routerLink="/my-transactions">
         <button id="my-listings-button">View Transactions</button>
     </a>
+    <div>
+        <h3>Welcome back {{user.user_name}}</h3>
+        <h3>Account Balance: {{user.account_balance | currency}}</h3>
+    </div>
 </div>
+
